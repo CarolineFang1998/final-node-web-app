@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "name": "final-node-web-app",
   "version": "1.0.0",
   "description": "Node.js HTTP Web server for the final project",
