@@ -10,4 +10,6 @@ app.get("/", function (req, res) {
     res.send("Welcome to Group 27's Final Project!");
 });
 
+UsersController(app);
+
 app.listen(process.env.PORT || 4000);
