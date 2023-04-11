@@ -1,3 +1,4 @@
+
 import mongoose from "mongoose";
 const usersSchema = new mongoose.Schema(
     {
@@ -6,9 +7,14 @@ const usersSchema = new mongoose.Schema(
         firstName: String,
         lastName: String,
         email: { type: String },
-        age: Number,
-        salary: { type: Number, default: 100000 },
-        role: { type: String, default: "USER", enum: ["USER", "ADMIN", "FACULTY"] },
+        role: { type: String, default: "USER", enum: ["USER", "ADMIN", "OWNER"] },
+        canReview: { type: Boolean, default: true },
+
+        // todo: completed by copilot, need to change
+        // Reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: "reviews" }],
+        // favRestaurants: [{ type: mongoose.Schema.Types.ObjectId, ref: "restaurants" }],
+        // fowllowers: [{ type: mongoose.Schema.Types.ObjectId, ref: "users" }],
+        // following: [{ type: mongoose.Schema.Types.ObjectId, ref: "users" }],
     },
     {
         collection: "users",

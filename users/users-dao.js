@@ -6,8 +6,8 @@ export const findAllUsers = async () => {
 };
 
 // use find function to do the filter
-export const findAllFaculty = async () => {
-    const users = await usersModel.find({ role: "FACULTY" });
+export const findAllAdmin = async () => {
+    const users = await usersModel.find({ role: "ADMIN" });
     return users;
 };
 
