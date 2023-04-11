@@ -1,21 +1,24 @@
 // import users from "./users.js";
 import * as usersDao from "./users-dao.js";
 
-let currentUser = null;
+// only support single user login
+// let currentUser = null;
 
+// we use async to make sure the function is asynchronous
+// and we use await to make sure the function is executed in order
 function UsersController(app) {
     const findAllUsers = async (req, res) => {
         const users = await usersDao.findAllUsers();
         res.send(users);
     };
     const findUserById = async (req, res) => {
-        const id = req.params.id;
+        const id = req.params._id;
         // const user = users.find((user) => user.id === id);
         const user = await usersDao.findUserById(id);
         res.send(user);
     };
     const deleteUserById = async (req, res) => {
-        const id = req.params.id;
+        const id = req.params._id;
         // const user = users.find((user) => user.id === id);
         // const index = users.indexOf(user);
         // users.splice(index, 1);
@@ -29,7 +32,7 @@ function UsersController(app) {
         res.json(user);
     };
     const updateUser = async (req, res) => {
-        const id = req.params.id;
+        const id = req.params._id;
         // const user = users.find((user) => user.id === id);
         // const index = users.indexOf(user);
         // users[index] = { ...user, ...req.body };
@@ -38,27 +41,32 @@ function UsersController(app) {
     };
     const login = async (req, res) => {
         const user = req.body;
-        // const foundUser = users.find(
-        //   (user) =>
-        //     user.username === req.body.username &&
-        //     user.password === req.body.password
-        // );
+        console.log(user);
         const foundUser = await usersDao.findUserByCredentials(
             req.body.username,
             req.body.password
         );
+        console.log(foundUser);
         if (foundUser) {
-            currentUser = foundUser;
+            // use the key currentUser to store the user we found
+            req.session["currentUser"] = foundUser;
+            // only support single user login
+            // currentUser = foundUser;
             res.send(foundUser);
         } else {
             res.sendStatus(404);
         }
     };
     const logout = async (req, res) => {
-        currentUser = null;
+        // directly destroy the user
+        req.session.destroy();
+        // only for single user logout
+        // currentUser = null;
         res.sendStatus(204);
     };
     const profile = async (req, res) => {
+        // if there is an user in the session, return the user
+        const currentUser = req.session["currentUser"];
         if (currentUser) {
             res.send(currentUser);
         } else {
@@ -74,7 +82,8 @@ function UsersController(app) {
         } else {
             // const newUser = { ...user, id: new Date().getTime() };
             const newUser = await usersDao.createUser(user);
-            currentUser = newUser;
+            req.session["currentUser"] = newUser;
+            // currentUser = newUser;
             // users.push(newUser);
             res.json(newUser);
         }
@@ -86,7 +95,7 @@ function UsersController(app) {
     app.post("/api/users/register", register);
 
     app.get("/api/users", findAllUsers);
-    //   app.get("/api/users/:id", findUserById);
+    app.get("/api/users/:id", findUserById);
     app.delete("/api/users/:id", deleteUserById);
     app.post("/api/users", createUser);
     app.put("/api/users/:id", updateUser);
