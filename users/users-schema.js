@@ -9,8 +9,8 @@ const usersSchema = new mongoose.Schema(
         email: { type: String },
         role: { type: String, default: "USER", enum: ["USER", "ADMIN", "OWNER"] },
         canReview: { type: Boolean, default: true },
-        restaurantID: { type: String, default: ""},
-        restaurantName: { type: String, default: ""}
+        restaurantID: { type: String},
+        restaurantName: { type: String}
 
         // todo: completed by copilot, need to change
         // Reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: "reviews" }],
