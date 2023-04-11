@@ -4,7 +4,8 @@ const apiKey = 'Iv_abp1th6eEephLxCam5MBUu124TXnN0TKd5uAxFSQe3WZtismnqAhRBnAzUBIK
                + '7c0fepysR1f0Bdc8ggZa0M9jDyCRzGSjXLYWpUWQjZHYx';
 const client = yelp.client(apiKey);
 
-function SearchController(app) {
+function SearchDetailController(app) {
+    // search by location and search context
     app.get('/api/search/:location/:param', (req, res) => {
         const location = req.params.location;
         const param = req.params.param;
@@ -21,6 +22,8 @@ function SearchController(app) {
             console.log(e);
         });
     })
+
+    // search by restaurant id
     app.get('/api/detail/:id', (req, res) => {
         const id = req.params.id;
         client.business(id).then(response => {
@@ -32,5 +35,5 @@ function SearchController(app) {
     })
 }
 
-export default SearchController;
+export default SearchDetailController;
 

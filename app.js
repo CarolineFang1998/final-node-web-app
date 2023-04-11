@@ -4,7 +4,7 @@ import UsersController from "./users/users-controller.js";
 import mongoose from "mongoose";
 import SessionController from "./users/session-controller.js";
 import session from "express-session";
-import SearchController from "./search/search-controller.js";
+import SearchDetailController from "./search-detail/search-detail-controller.js";
 
 // connect to the local database
 // mongoose.connect('mongodb://127.0.0.1:27017/tuiter');
@@ -40,7 +40,7 @@ app.get("/", function (req, res) {
     res.send("Welcome to Group 27's Final Project!");
 });
 
-SearchController(app);
+SearchDetailController(app);
 UsersController(app);
 SessionController(app);
 
