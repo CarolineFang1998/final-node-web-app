@@ -12,7 +12,7 @@ function SearchDetailController(app) {
         client.search({
                           term: param+'+dog+friendly',
                           location: location,
-                          limit: '2',
+                          limit: '10',
                           categories: 'restaurants,bars',
                           open_now: true
                       }).then(response => {
