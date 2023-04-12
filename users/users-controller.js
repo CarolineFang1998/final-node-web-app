@@ -68,10 +68,7 @@ function UsersController(app) {
         // if there is an user in the session, return the user
         const currentUser = req.session["currentUser"];
         if (currentUser) {
-            res.send(currentUser);
-        } else {
-            res.sendStatus(404);
-        }
+            res.send(currentUser);}
     };
     const register = async (req, res) => {
         const user = req.body;

@@ -1,7 +1,9 @@
 import yelp from 'yelp-fusion';
 
-const apiKey = 'Iv_abp1th6eEephLxCam5MBUu124TXnN0TKd5uAxFSQe3WZtismnqAhRBnAzUBIK5XF3CJIw5NqOxag1XQp'
-               + '7c0fepysR1f0Bdc8ggZa0M9jDyCRzGSjXLYWpUWQjZHYx';
+// const apiKey = 'Iv_abp1th6eEephLxCam5MBUu124TXnN0TKd5uAxFSQe3WZtismnqAhRBnAzUBIK5XF3CJIw5NqOxag1XQp'
+//                + '7c0fepysR1f0Bdc8ggZa0M9jDyCRzGSjXLYWpUWQjZHYx';
+const apiKey = 'PJj8QhAyfQga0ptU85QeQypZJDK2j3kflSwy3rMLiK-k8P6VKe-_cBCvGwKPrYdDm9XT2tWzuGbtvmskd77' +
+    'Q63ro9JQ2-dhQrW5W8sZbYq25LBBZM0BpvxniQRk2ZHYx';
 const client = yelp.client(apiKey);
 
 function SearchDetailController(app) {
