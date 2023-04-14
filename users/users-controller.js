@@ -1,6 +1,5 @@
 // import users from "./users.js";
 import * as usersDao from "./users-dao.js";
-
 // only support single user login
 // let currentUser = null;
 
@@ -32,24 +31,24 @@ function UsersController(app) {
         res.json(user);
     };
     const updateUser = async (req, res) => {
-        const id = req.params._id;
-        // const user = users.find((user) => user.id === id);
-        // const index = users.indexOf(user);
-        // users[index] = { ...user, ...req.body };
-        const status = await usersDao.updateUser(id, req.body);
+        req.session.currentUser = req.body;
+        console.log("updated", req.session);
+
+        const status = await usersDao.updateUser(req.session.currentUser);
         res.json(status);
     };
     const login = async (req, res) => {
         const user = req.body;
-        console.log(user);
+        //console.log(user);
         const foundUser = await usersDao.findUserByCredentials(
             req.body.username,
             req.body.password
         );
-        console.log(foundUser);
+        //console.log(foundUser);
         if (foundUser) {
             // use the key currentUser to store the user we found
             req.session["currentUser"] = foundUser;
+            console.log("save session", req.session);
             // only support single user login
             // currentUser = foundUser;
             res.send(foundUser);
@@ -67,9 +66,11 @@ function UsersController(app) {
     const profile = async (req, res) => {
         // if there is an user in the session, return the user
         const currentUser = req.session["currentUser"];
+       // console.log("profile", currentUser);
         if (currentUser) {
             res.send(currentUser);}
     };
+
     const register = async (req, res) => {
         const user = req.body;
         // const foundUser = users.find((user) => user.username === req.body.username);

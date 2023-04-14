@@ -43,7 +43,7 @@ export const createUser = async (user) => {
 
 
 // find the user by id and update the user
-export const updateUser = async (id, user) => {
-    const status = await usersModel.updateOne({ _id: id }, user);
+export const updateUser = async (user) => {
+    const status = await usersModel.updateOne(user);
     return status;
 };

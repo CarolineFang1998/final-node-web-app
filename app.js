@@ -31,7 +31,7 @@ app.use(
         // todo: when we decided to run the app on netlify and render, we need to set secure to true
         // different cookie for different users logged in at the same time
         cookie: { secure: false },
-        saveUninitialized: true
+        saveUninitialized: false
     })
 );
 
