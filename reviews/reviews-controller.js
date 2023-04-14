@@ -1,4 +1,4 @@
-import * from "./reviews-dao.js";
+import * as reviewsDao from "./reviews-dao.js";
 
 function ReviewsController(app) {
     const findAllReviews = async (req, res) => {
@@ -24,15 +24,13 @@ function ReviewsController(app) {
         const review = await reviewsDao.createReview(req.body);
         res.json(review);
     };
-    const updateReview = async (req, res) => {
-        const id = req.params._id;
-        const status = await reviewsDao.updateReview(id, req.body);
-        res.json(status);
-    };
+
     app.get("/api/reviews", findAllReviews);
     app.get("/api/reviews/:restaurantId", findReviewsByRestaurantId);
     app.get("/api/reviews/user/:userId", findReviewsByUserId);
     app.delete("/api/reviews/:_id", deleteReview);
     app.post("/api/reviews", createReview);
-    app.put("/api/reviews/:_id", updateReview);
+
 }
+
+export default ReviewsController;
