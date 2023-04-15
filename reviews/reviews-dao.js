@@ -1,4 +1,4 @@
-import reviewsModel from "./reviews-model";
+import reviewsModel from "./reviews-model.js";
 
 export const findAllReviews = async () => {
     const reviews = await reviewsModel.find();
@@ -17,5 +17,10 @@ export const findReviewsByUserId = async (userId) => {
 
 export const deleteReview = async (id) => {
     const status = await reviewsModel.deleteOne({ _id: id });
-    return status;
+ 
+};
+
+export const createReview = async (review) => {
+    const newReview = await reviewsModel.create(review);
+    return newReview;
 };

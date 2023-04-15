@@ -26,9 +26,9 @@ function ReviewsController(app) {
     };
 
     app.get("/api/reviews", findAllReviews);
-    app.get("/api/reviews/:restaurantId", findReviewsByRestaurantId);
+    app.get("/api/reviews/restaurant/:restaurantId", findReviewsByRestaurantId);
     app.get("/api/reviews/user/:userId", findReviewsByUserId);
-    app.delete("/api/reviews/:_id", deleteReview);
+    app.delete("/api/reviews/:id", deleteReview);
     app.post("/api/reviews", createReview);
 
 }
