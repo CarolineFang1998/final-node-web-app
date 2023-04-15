@@ -16,7 +16,7 @@ function ReviewsController(app) {
         res.send(reviews);
     };
     const deleteReview = async (req, res) => {
-        const id = req.params._id;
+        const id = req.params.id;
         const status = await reviewsDao.deleteReview(id);
         res.json(status);
     };

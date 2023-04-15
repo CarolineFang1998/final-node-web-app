@@ -17,7 +17,7 @@ export const findReviewsByUserId = async (userId) => {
 
 export const deleteReview = async (id) => {
     const status = await reviewsModel.deleteOne({ _id: id });
- 
+    return status;
 };
 
 export const createReview = async (review) => {
