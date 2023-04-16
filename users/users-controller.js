@@ -32,11 +32,15 @@ function UsersController(app) {
         res.json(user);
     };
     const updateUser = async (req, res) => {
-        const id = req.params._id;
+        const id = req.body._id;
         // const user = users.find((user) => user.id === id);
         // const index = users.indexOf(user);
         // users[index] = { ...user, ...req.body };
         const status = await usersDao.updateUser(id, req.body);
+        console.log("controller");
+        console.log()
+        console.log(id);
+        console.log(req.body);
         res.json(status);
     };
     const login = async (req, res) => {

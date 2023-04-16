@@ -9,7 +9,7 @@ const usersSchema = new mongoose.Schema(
         email: { type: String },
         role: { type: String, default: "USER", enum: ["USER", "ADMIN", "OWNER"] },
         canReview: { type: Boolean, default: true },
-        restaurantID: { type: String},
+        restaurantID: { type: String, required: false},
         restaurantName: { type: String},
         zipcode: { type: String }
 
