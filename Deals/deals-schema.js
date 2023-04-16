@@ -6,9 +6,10 @@ const dealsSchema = new mongoose.Schema(
     {
        
         restaurantID: { type: String, required: true },
+        restaurantName: { type: String, required: true },
         userID: { type: String, required: true },
         username: { type: String, required: true },
-        content: { type: String, required: true },
+        deal: { type: String, required: true },
         date: { type: Date, default: dateUS },
         isActive: { type: Boolean, default: true }
     },
