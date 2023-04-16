@@ -1,19 +1,20 @@
 import mongoose from "mongoose";
 import moment from "moment-timezone";
 const dateUS = moment().tz("America/Los_Angeles").format("YYYY-MM-DD HH:mm:ss");
-console.log(dateUS);
-const reviewsSchema = new mongoose.Schema(
+
+const dealsSchema = new mongoose.Schema(
     {
        
         restaurantID: { type: String, required: true },
         userID: { type: String, required: true },
         username: { type: String, required: true },
-        review: { type: String, required: true },
-        date: { type: Date, default: dateUS }
+        content: { type: String, required: true },
+        date: { type: Date, default: dateUS },
+        isActive: { type: Boolean, default: true }
     },
     {
-        collection: "reviews",
+        collection: "deals",
     }
 );
 
-export default reviewsSchema;
+export default dealsSchema;
