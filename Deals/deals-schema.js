@@ -7,6 +7,7 @@ const dealsSchema = new mongoose.Schema(
        
         restaurantID: { type: String, required: true },
         restaurantName: { type: String, required: false },
+        restaurantLocation: { type: String, required: false},
         userID: { type: String, required: true },
         username: { type: String, required: true },
         deal: { type: String, required: true },
