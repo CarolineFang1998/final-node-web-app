@@ -3,6 +3,7 @@ import cors from 'cors'
 import UsersController from "./users/users-controller.js";
 import mongoose from "mongoose";
 import SessionController from "./users/session-controller.js";
+import FollowsController from "./profile/Follow/follows-controller.js";
 import session from "express-session";
 import SearchDetailController from "./search-detail/search-detail-controller.js";
 
@@ -23,17 +24,31 @@ app.use(
     })
 );
 app.use(express.json());
-app.use(
-    session({
-        secret: "process.env.SECRET",
-        // I don't want to save the session if it is not modified
-        resave: false,
-        // todo: when we decided to run the app on netlify and render, we need to set secure to true
-        // different cookie for different users logged in at the same time
-        cookie: { secure: false },
-        saveUninitialized: false
-    })
-);
+
+let sess = {
+   secret: "process.env.SECRET",
+   resave: false,
+   cookie: { secure: false },
+   saveUninitialized: true,
+};
+
+if (process.env.ENV === 'production') {
+   app.set('trust proxy', 1)
+   sess.cookie.secure = true;
+}
+app.use(session(sess));
+
+//app.use(
+//    session({
+//        secret: "process.env.SECRET",
+//        // I don't want to save the session if it is not modified
+//        resave: false,
+//        // todo: when we decided to run the app on netlify and render, we need to set secure to true
+//        // different cookie for different users logged in at the same time
+//        cookie: { secure: false },
+//        saveUninitialized: true
+//    })
+//);
 
 
 app.get("/", function (req, res) {
@@ -43,5 +58,5 @@ app.get("/", function (req, res) {
 SearchDetailController(app);
 UsersController(app);
 SessionController(app);
-
+FollowsController(app);
 app.listen(process.env.PORT || 4000);

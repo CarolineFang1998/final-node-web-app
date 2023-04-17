@@ -1,4 +1,5 @@
 import usersModel from "./users-model.js";
+import mongoose from "mongoose";
 
 export const findAllUsers = async () => {
     const users = await usersModel.find();
@@ -17,8 +18,8 @@ export const findAllByRole = async (role) => {
 };
 
 export const findUserById = async (id) => {
-    const user = await usersModel.findById(id);
-    return user;
+  const user = await usersModel.findById(id);
+  return user;
 };
 
 export const findUserByUsername = async (username) => {
@@ -32,6 +33,7 @@ export const findUserByCredentials = async (username, password) => {
 };
 
 export const deleteUser = async (id) => {
+    console.log("deleting this user: ", id);
     const status = await usersModel.deleteOne({ _id: id });
     return status;
 };

@@ -10,14 +10,23 @@ function UsersController(app) {
         const users = await usersDao.findAllUsers();
         res.send(users);
     };
+
+    //find the user by username: profile/username
+    const findUserByUsername = async (req, res) => {
+        const username = req.params.id;
+        const user = await usersDao.findUserByUsername(username);
+        //console.log(user);
+        res.json(user);
+    };
+    //find the user by username: profile/username
     const findUserById = async (req, res) => {
-        const id = req.params._id;
-        // const user = users.find((user) => user.id === id);
+        const id = req.params.id;
         const user = await usersDao.findUserById(id);
-        res.send(user);
+        //console.log(user);
+        res.json(user);
     };
     const deleteUserById = async (req, res) => {
-        const id = req.params._id;
+        const id = req.params.id;
         // const user = users.find((user) => user.id === id);
         // const index = users.indexOf(user);
         // users.splice(index, 1);
@@ -32,8 +41,6 @@ function UsersController(app) {
     };
     const updateUser = async (req, res) => {
         req.session.currentUser = req.body;
-        console.log("updated", req.session);
-
         const status = await usersDao.updateUser(req.session.currentUser);
         res.json(status);
     };
@@ -48,7 +55,6 @@ function UsersController(app) {
         if (foundUser) {
             // use the key currentUser to store the user we found
             req.session["currentUser"] = foundUser;
-            console.log("save session", req.session);
             // only support single user login
             // currentUser = foundUser;
             res.send(foundUser);
@@ -68,7 +74,8 @@ function UsersController(app) {
         const currentUser = req.session["currentUser"];
        // console.log("profile", currentUser);
         if (currentUser) {
-            res.send(currentUser);}
+            res.send(currentUser);
+        }
     };
 
     const register = async (req, res) => {
@@ -93,7 +100,7 @@ function UsersController(app) {
     app.post("/api/users/register", register);
 
     app.get("/api/users", findAllUsers);
-    app.get("/api/users/:id", findUserById);
+    app.get("/api/users/profile/:id", findUserById);
     app.delete("/api/users/:id", deleteUserById);
     app.post("/api/users", createUser);
     app.put("/api/users/:id", updateUser);
