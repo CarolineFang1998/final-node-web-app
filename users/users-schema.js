@@ -11,6 +11,7 @@ const usersSchema = new mongoose.Schema(
         canReview: { type: Boolean, default: true },
         restaurantID: { type: String, required: false},
         restaurantName: { type: String},
+        favRestaurants: { type: Array, required: false, default: [] },
         zipcode: { type: String }
 
         // todo: completed by copilot, need to change
