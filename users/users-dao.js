@@ -48,6 +48,5 @@ export const updateUser = async (id, user) => {
     console.log("dao");
     console.log(id);
     console.log(user);
- 
     return status;
 };

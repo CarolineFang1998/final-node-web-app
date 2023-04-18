@@ -17,8 +17,17 @@ const FavoriteRestaurantsController = (app) => {
         res.json(favRestaurants);
     };
 
+    const unFavoriteRestaurant = async (req, res) => {
+        console.log(req.params);
+        const restaurantId = req.params.restaurantId;
+        const userId = req.params.userId;
+        const status = await favoriteRestaurantsDao.unFavoriteRestaurant(userId, restaurantId);
+        res.json(status);
+    };
+
     app.post("/api/users/:userId/favoriteRestaurants/:restaurantId/:restaurantName", favoriteRestaurant);
     app.get("/api/users/:userId/favoriteRestaurants", findFavRestaurantsByUserId);
+    app.delete("/api/users/:userId/favoriteRestaurants/:restaurantId", unFavoriteRestaurant);
 };
 
 export default FavoriteRestaurantsController;

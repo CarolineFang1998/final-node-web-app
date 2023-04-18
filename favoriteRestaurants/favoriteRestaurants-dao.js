@@ -10,6 +10,12 @@ export const favoriteRestaurants = async(userId, restaurantId, restaurantName) =
     return newFavRestaurant;
 };
 
+export const unFavoriteRestaurant = async(userId, restaurantId) => {
+    const unFavRestaurant = await favoriteRestaurantsModel.deleteMany({restaurantId: restaurantId, userId: userId});
+
+    return unFavRestaurant;
+};
+
 
 
 // export const unFavoriteRestaurant = async(restaurantId) => {
