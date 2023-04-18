@@ -5,9 +5,10 @@ export const createFollow = async (followed, following) => {
   return newFollow;
 };
 
-export const findFollowersByFollowed = async (userId) => {
-  const followers = await followsModel.find({ followed: userId });
-  return followers;
+export const findFollowingByFollowed = async (userId) => {
+   return await followsModel.find({ followed: userId })
+  .populate("following", "username")
+  .exec();
 };
 
 export const findFollowedByFollowing = async (userId) => {
@@ -17,7 +18,6 @@ export const findFollowedByFollowing = async (userId) => {
 
 export const unfollow = async (followed, following) => {
     const deletedFollow = await followsModel.deleteOne({followed: followed, following: following});
-    //console.log("deletedFollow dao", deletedFollow);
     return deletedFollow;
 };
 
