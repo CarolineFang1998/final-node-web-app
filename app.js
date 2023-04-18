@@ -46,11 +46,9 @@ app.get("/", function (req, res) {
 SearchDetailController(app);
 UsersController(app);
 SessionController(app);
-<<<<<<< HEAD
 FollowsController(app);
-=======
 ReviewsController(app);
 DealsController(app);
 
->>>>>>> test
+
 app.listen(process.env.PORT || 4000);
