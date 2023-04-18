@@ -49,3 +49,12 @@ export const updateUser = async (user) => {
     const status = await usersModel.updateOne(user);
     return status;
 };
+
+//export const updateUser = async (id, user) => {
+//    const status = await usersModel.updateOne({ _id: id }, {$set: user});
+//    console.log("dao");
+//    console.log(id);
+//    console.log(user);
+//
+//    return status;
+//};

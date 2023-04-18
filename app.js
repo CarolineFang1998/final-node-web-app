@@ -6,7 +6,8 @@ import SessionController from "./users/session-controller.js";
 import FollowsController from "./profile/Follow/follows-controller.js";
 import session from "express-session";
 import SearchDetailController from "./search-detail/search-detail-controller.js";
-
+import ReviewsController from "./reviews/reviews-controller.js";
+import DealsController from "./deals/deals-controller.js";
 // connect to the local database
 // mongoose.connect('mongodb://127.0.0.1:27017/tuiter');
 
@@ -38,19 +39,6 @@ if (process.env.ENV === 'production') {
 }
 app.use(session(sess));
 
-//app.use(
-//    session({
-//        secret: "process.env.SECRET",
-//        // I don't want to save the session if it is not modified
-//        resave: false,
-//        // todo: when we decided to run the app on netlify and render, we need to set secure to true
-//        // different cookie for different users logged in at the same time
-//        cookie: { secure: false },
-//        saveUninitialized: true
-//    })
-//);
-
-
 app.get("/", function (req, res) {
     res.send("Welcome to Group 27's Final Project!");
 });
@@ -58,5 +46,11 @@ app.get("/", function (req, res) {
 SearchDetailController(app);
 UsersController(app);
 SessionController(app);
+<<<<<<< HEAD
 FollowsController(app);
+=======
+ReviewsController(app);
+DealsController(app);
+
+>>>>>>> test
 app.listen(process.env.PORT || 4000);
