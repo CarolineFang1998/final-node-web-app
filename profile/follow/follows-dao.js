@@ -22,6 +22,6 @@ export const unfollow = async (followed, following) => {
 };
 
 export const findIsFollowedById = async (followed, following) => {
-    const findFollowed = await followsModel.findOne({followed: followed, following:following});
+    const findFollowed = await followsModel.findOne({followed: followed, following: following});
     return findFollowed;
 }

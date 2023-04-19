@@ -33,7 +33,6 @@ export const findUserByCredentials = async (username, password) => {
 };
 
 export const deleteUser = async (id) => {
-    console.log("deleting this user: ", id);
     const status = await usersModel.deleteOne({ _id: id });
     return status;
 };
@@ -46,15 +45,14 @@ export const createUser = async (user) => {
 
 // find the user by id and update the user
 export const updateUser = async (user) => {
-    const status = await usersModel.updateOne(user);
+    const userId = user._id;
+    delete user._id;
+    const status = await usersModel.updateOne({_id: userId}, user);
     return status;
 };
 
 //export const updateUser = async (id, user) => {
 //    const status = await usersModel.updateOne({ _id: id }, {$set: user});
-//    console.log("dao");
-//    console.log(id);
-//    console.log(user);
 //
 //    return status;
 //};

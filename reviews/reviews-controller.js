@@ -1,7 +1,7 @@
 import * as reviewsDao from "./reviews-dao.js";
 
 function ReviewsController(app) {
-    const findAllReviews = async (req, res) => {
+        const findAllReviews = async (req, res) => {
         const reviews = await reviewsDao.findAllReviews();
         res.send(reviews);
     };

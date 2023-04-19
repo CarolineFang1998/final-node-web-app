@@ -15,14 +15,12 @@ function UsersController(app) {
     const findUserByUsername = async (req, res) => {
         const username = req.params.id;
         const user = await usersDao.findUserByUsername(username);
-        //console.log(user);
         res.json(user);
     };
     //find the user by username: profile/username
     const findUserById = async (req, res) => {
         const id = req.params.id;
         const user = await usersDao.findUserById(id);
-        //console.log(user);
         res.json(user);
     };
     const deleteUserById = async (req, res) => {
@@ -39,19 +37,24 @@ function UsersController(app) {
         const user = await usersDao.createUser(req.body);
         res.json(user);
     };
-    const updateUser = async (req, res) => {
+    const updateCurrentUser = async (req, res) => {
         req.session.currentUser = req.body;
         const status = await usersDao.updateUser(req.session.currentUser);
         res.json(status);
     };
+
+    const updateUser = async (req, res) => {
+        console.log("req.body", req.body);
+        const status = await usersDao.updateUser(req.body);
+        res.json(status);
+    };
+
     const login = async (req, res) => {
         const user = req.body;
-        //console.log(user);
         const foundUser = await usersDao.findUserByCredentials(
             req.body.username,
             req.body.password
         );
-        //console.log(foundUser);
         if (foundUser) {
             // use the key currentUser to store the user we found
             req.session["currentUser"] = foundUser;
@@ -72,7 +75,6 @@ function UsersController(app) {
     const profile = async (req, res) => {
         // if there is an user in the session, return the user
         const currentUser = req.session["currentUser"];
-       // console.log("profile", currentUser);
         if (currentUser) {
             res.send(currentUser);
         }
@@ -103,7 +105,8 @@ function UsersController(app) {
     app.get("/api/users/profile/:id", findUserById);
     app.delete("/api/users/:id", deleteUserById);
     app.post("/api/users", createUser);
-    app.put("/api/users/:id", updateUser);
+    app.put("/api/users/:id", updateCurrentUser);
+    app.put("/api/users/update/:id", updateUser);
 }
 
 export default UsersController;

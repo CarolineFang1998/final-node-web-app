@@ -4,8 +4,13 @@ function FollowsController(app) {
   const createFollow = async (req, res) => {
     const followed = req.body.followed;
     const following = req.body.following;
-    const newFollow = await followsDao.createFollow(followed, following);
-    res.json(newFollow);
+    const findFollowed = await followsDao.findIsFollowedById(followed, following);
+    if (findFollowed) {
+        res.json({});
+    } else {
+        const newFollow = await followsDao.createFollow(followed, following);
+        res.json(newFollow);
+    }
   };
 
   const findFollowingByFollowed = async (req, res) => {
