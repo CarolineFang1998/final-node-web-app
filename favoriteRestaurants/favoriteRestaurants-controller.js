@@ -5,9 +5,9 @@ const FavoriteRestaurantsController = (app) => {
         const userId = req.params.userId;
         const restaurantId = req.params.restaurantId;
         const restaurantName = req.params.restaurantName;
+        console.log("fav");
         console.log(req.params);
         const status = await favoriteRestaurantsDao.favoriteRestaurants(userId, restaurantId, restaurantName);
-        console.log(status);
         res.json(status);
     };
 
