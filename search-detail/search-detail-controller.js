@@ -29,7 +29,7 @@ function SearchDetailController(app) {
     app.get('/api/detail/:id', (req, res) => {
         const id = req.params.id;
         client.business(id).then(response => {
-            console.log(response.jsonBody.name);
+            // console.log(response.jsonBody.name);
             res.send(response.jsonBody);
         }).catch(e => {
             console.log(e);

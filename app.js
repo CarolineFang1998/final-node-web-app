@@ -8,6 +8,7 @@ import session from "express-session";
 import SearchDetailController from "./search-detail/search-detail-controller.js";
 import ReviewsController from "./reviews/reviews-controller.js";
 import DealsController from "./deals/deals-controller.js";
+import FavoriteRestaurantsController from "./favoriteRestaurants/favoriteRestaurants-controller.js";
 // connect to the local database
 // mongoose.connect('mongodb://127.0.0.1:27017/tuiter');
 
@@ -49,6 +50,7 @@ SessionController(app);
 FollowsController(app);
 ReviewsController(app);
 DealsController(app);
+FavoriteRestaurantsController(app);
 
 
 app.listen(process.env.PORT || 4000);
