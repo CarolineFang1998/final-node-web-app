@@ -17,26 +17,24 @@ function UsersController(app) {
         const user = await usersDao.findUserByUsername(username);
         res.json(user);
     };
-    //find the user by username: profile/username
+    //find the user by username: profile/id
     const findUserById = async (req, res) => {
         const id = req.params.id;
         const user = await usersDao.findUserById(id);
         res.json(user);
     };
+
     const deleteUserById = async (req, res) => {
         const id = req.params.id;
-        // const user = users.find((user) => user.id === id);
-        // const index = users.indexOf(user);
-        // users.splice(index, 1);
         const status = await usersDao.deleteUser(id);
         res.json(status);
     };
+
     const createUser = async (req, res) => {
-        // const user = req.body;
-        // users.push({ ...user, id: new Date().getTime() });
         const user = await usersDao.createUser(req.body);
         res.json(user);
     };
+
     const updateCurrentUser = async (req, res) => {
         req.session.currentUser = req.body;
         const status = await usersDao.updateUser(req.session.currentUser);
@@ -72,6 +70,7 @@ function UsersController(app) {
         // currentUser = null;
         res.sendStatus(204);
     };
+
     const profile = async (req, res) => {
         // if there is an user in the session, return the user
         const currentUser = req.session["currentUser"];
