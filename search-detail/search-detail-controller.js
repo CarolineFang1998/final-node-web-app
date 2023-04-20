@@ -18,7 +18,7 @@ function SearchDetailController(app) {
                           categories: 'restaurants,bars',
                           open_now: true
                       }).then(response => {
-            console.log(JSON.stringify(response.jsonBody));
+            //console.log(JSON.stringify(response.jsonBody));
             res.send(response.jsonBody.businesses);
         }).catch(e => {
             console.log(e);

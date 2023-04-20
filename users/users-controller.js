@@ -42,7 +42,6 @@ function UsersController(app) {
     };
 
     const updateUser = async (req, res) => {
-        console.log("req.body", req.body);
         const status = await usersDao.updateUser(req.body);
         res.json(status);
     };
