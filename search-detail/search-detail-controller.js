@@ -15,8 +15,7 @@ function SearchDetailController(app) {
                           term: param+'+dog+friendly',
                           location: location,
                           limit: '10',
-                          categories: 'restaurants,bars',
-                          open_now: true
+                          categories: 'restaurants,bars'
                       }).then(response => {
             //console.log(JSON.stringify(response.jsonBody));
             res.send(response.jsonBody.businesses);
