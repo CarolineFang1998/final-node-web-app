@@ -14,7 +14,7 @@ export const findFollowingByFollowed = async (userId) => {
 export const findFollowedByFollowing = async (userId) => {
   const followed = await followsModel.find({ following: userId })
   .populate("followed", "username")
-    .exec();
+  .exec();
   return followed;
 };
 
